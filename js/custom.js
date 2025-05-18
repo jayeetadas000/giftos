@@ -1,4 +1,4 @@
-// Get current year
+// Set current year
 function getYear() {
   const currentYear = new Date().getFullYear();
   const yearEl = document.querySelector("#displayYear");
@@ -6,7 +6,7 @@ function getYear() {
 }
 getYear();
 
-// Owl carousel setup
+// Owl Carousel Setup
 $('.owl-carousel').owlCarousel({
   loop: true,
   margin: 10,
@@ -20,20 +20,16 @@ $('.owl-carousel').owlCarousel({
   }
 });
 
-// function changeImage(element) {
-//   const mainImage = document.getElementById('main-image');
-//   if (mainImage) mainImage.src = element.src;
-// }
-
-// Load Header and Footer
+// Load Header & Footer
 fetch('includes/header.html')
   .then(res => res.text())
   .then(data => {
     document.getElementById('header').innerHTML = data;
 
-    setActiveNav(); //Set active menu item based on URL
+    setActiveNav();
+    renderCartDrawer();
+    updateCartCount();
 
-    // Cart icon click
     const cartIcon = document.querySelector(".cart-icon");
     if (cartIcon) {
       cartIcon.addEventListener("click", function (e) {
@@ -42,7 +38,6 @@ fetch('includes/header.html')
       });
     }
 
-    // Cart open/close buttons
     const closeCartBtn = document.getElementById('close-cart-btn');
     if (closeCartBtn) {
       closeCartBtn.addEventListener('click', () => {
@@ -58,28 +53,23 @@ fetch('includes/header.html')
       });
     }
 
-    // Checkout button logic
-    // const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || false;
-    // const checkoutBtn = document.getElementById('checkout-btn');
-    // if (checkoutBtn) {
-    //   checkoutBtn.addEventListener('click', () => {
-    //     if (!isLoggedIn) {
-    //       alert('You need to login to proceed to checkout.');
-    //     } else {
-    //       window.location.href = 'checkout.html';
-    //     }
-    //   });
-    // }
     const checkoutBtn = document.getElementById('checkout-btn');
-if (checkoutBtn) {
-  checkoutBtn.addEventListener('click', () => {
-    window.location.href = './check-out.html';
-  });
-}
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener('click', () => {
+        const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+        if (!isLoggedIn) {
+          alert('Please login or register before proceeding to checkout.');
+          window.location.href = 'login.html';
+        } else {
+          window.location.href = './check-out.html';
+        }
+      });
+    }
 
-    
-    renderCartDrawer();
-    updateCartCount();
+    const logoutLink = document.getElementById('logout-btn');
+    if (logoutLink) {
+      logoutLink.addEventListener('click', logout);
+    }
   });
 
 fetch('includes/footer.html')
@@ -88,7 +78,7 @@ fetch('includes/footer.html')
     document.getElementById('footer').innerHTML = data;
   });
 
-// Product click -> save to localStorage and redirect
+// Product Click
 const productBoxes = document.querySelectorAll('.product-box');
 productBoxes.forEach(product => {
   product.addEventListener('click', () => {
@@ -102,7 +92,7 @@ productBoxes.forEach(product => {
   });
 });
 
-// Render product details from localStorage
+// Render Product Details
 const product = JSON.parse(localStorage.getItem('selectedProduct'));
 if (product) {
   const nameEl = document.getElementById('product-name');
@@ -121,7 +111,7 @@ if (product) {
   }
 }
 
-// Add to cart
+// Add to Cart
 const addToCartBtn = document.getElementById('add-to-cart');
 if (addToCartBtn) {
   addToCartBtn.addEventListener('click', () => {
@@ -180,10 +170,8 @@ function removeFromCart(index) {
   renderCartDrawer();
 }
 
-// New: Set nav item active based on current page
 function setActiveNav() {
-  const currentPath = window.location.pathname.split('/').pop(); // e.g., 'shop.html'
-
+  const currentPath = window.location.pathname.split('/').pop();
   document.querySelectorAll('.navbar-nav .nav-item').forEach(item => {
     const link = item.querySelector('.nav-link');
     if (link) {
@@ -201,36 +189,79 @@ function setActiveNav() {
   });
 }
 
-// make another js file and add this below code
+// Checkout Page Logic
+if (window.location.pathname.includes('check-out.html')) {
+  document.addEventListener("DOMContentLoaded", function () {
+    const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+    if (!isLoggedIn) {
+      alert("You must be logged in to view the checkout page.");
+      window.location.href = 'login.html';
+      return;
+    }
 
+    const form = document.getElementById("orderForm");
+    const thankYouMessage = document.getElementById("thankYouMessage");
 
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("orderForm");
-  const thankYouMessage = document.getElementById("thankYouMessage");
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-  if (form) {
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
+        const address = document.getElementById("address").value.trim();
+        const codChecked = document.getElementById("cod").checked;
 
-      const address = document.getElementById("address").value.trim();
-      const codChecked = document.getElementById("cod").checked;
+        if (!address) {
+          alert("Please enter your address.");
+          return;
+        }
 
-      if (!address) {
-        alert("Please enter your address.");
-        return;
-      }
+        if (!codChecked) {
+          alert("Please check the Cash on Delivery option.");
+          return;
+        }
 
-      if (!codChecked) {
-        alert("Please check the Cash on Delivery option.");
-        return;
-      }
-      console.log("done")
-      // Simulate order processing
-      form.style.display = "none";
-      thankYouMessage.style.display = "block";
+        form.style.display = "none";
+        thankYouMessage.style.display = "block";
 
-      // Optionally clear cart
-      localStorage.removeItem('cart');
-    });
-  }
-});
+        localStorage.removeItem('cart');
+        updateCartCount();
+      });
+    }
+  });
+}
+
+// Login Page Logic
+if (window.location.pathname.includes('login.html')) {
+  document.addEventListener("DOMContentLoaded", function () {
+    const loginForm = document.getElementById("loginForm");
+    if (loginForm) {
+      loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        localStorage.setItem('userLoggedIn', 'true');
+        alert("Login successful!");
+        window.location.href = 'index.html';
+      });
+    }
+  });
+}
+
+// Register Page Logic
+if (window.location.pathname.includes('register.html')) {
+  document.addEventListener("DOMContentLoaded", function () {
+    const registerForm = document.getElementById("registerForm");
+    if (registerForm) {
+      registerForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        localStorage.setItem('userLoggedIn', 'true');
+        alert("Registration successful!");
+        window.location.href = 'index.html';
+      });
+    }
+  });
+}
+
+// Logout function
+function logout() {
+  localStorage.removeItem('userLoggedIn');
+  alert('You have been logged out.');
+  window.location.href = 'index.html';
+}

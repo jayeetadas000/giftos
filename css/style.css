@@ -901,7 +901,7 @@ a:focus {
 }
 
 .thumbnails img:hover {
-  border: 2px solid #007bff;
+  border: 2px solid #db4566;
 }
 
 .details {
@@ -1034,7 +1034,7 @@ button { margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer;
   cursor: pointer;
 }
 
-/* ─── Section & Heading ───────────────────────────────────────────────── */
+/* Section & Heading */
 .shop_section {
   padding: 60px 0;
   background-color: #f8f9fa;
@@ -1046,7 +1046,7 @@ button { margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer;
   margin-bottom: 40px;
 }
 
-/* ─── Product Card ─────────────────────────────────────────────────────── */
+/*  Product Card  */
 .product-box {
   position: relative;
   background: #fff;
@@ -1084,7 +1084,7 @@ button { margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer;
   transform: scale(1.05);
 }
 
-/* ─── Details ──────────────────────────────────────────────────────────── */
+/* Details  */
 .product-box .detail-box {
   padding: 15px;
   text-align: center;
@@ -1101,7 +1101,7 @@ button { margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer;
   color: #e63946;
 }
 
-/* ─── “New” Badge ─────────────────────────────────────────────────────── */
+/* “New” Badge */
 .product-box .new {
   position: absolute;
   top: 12px;
@@ -1116,7 +1116,7 @@ button { margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer;
   font-weight: 600;
 }
 
-/* ─── View All Button ─────────────────────────────────────────────────── */
+/* View All Button*/
 .btn-box {
   text-align: center;
   margin-top: 40px;
@@ -1124,7 +1124,7 @@ button { margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer;
 .btn-box a {
   display: inline-block;
   padding: 12px 30px;
-  background: #007bff;
+  background: #db4566;
   color: #fff;
   border-radius: 4px;
   font-weight: 600;
@@ -1135,7 +1135,7 @@ button { margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer;
   background: #0056b3;
 }
 
-/* ─── Responsive tweaks ───────────────────────────────────────────────── */
+/*  Responsive tweaks */
 @media (max-width: 576px) {
   .shop_section { padding: 40px 0; }
   .shop_section .heading_container h2 { font-size: 2rem; }
@@ -1177,7 +1177,109 @@ button { margin-top: 20px; padding: 10px 20px; font-size: 18px; cursor: pointer;
   background: #e74c3c;
   color: #fff;
   font-size: 12px;
-  padding: 2px 6px;
+  padding: 2px 8px;
   border-radius: 50%;
   font-weight: bold;
+}
+.checkout-form {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.checkout-form h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-group.checkbox label {
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+}
+.form-group.checkbox label input{
+  width:auto;
+}
+button#processBtn {
+  width: 100%;
+  padding: 12px;
+  background-color: #db4566;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button#processBtn:hover {
+  background-color: #db4566;
+}
+
+#thankYouMessage {
+  text-align: center;
+  color: #db4566;
+  font-size: 20px;
+}
+:focus-visible {
+    outline: 0;
+}
+
+.lr-form-container {
+      max-width: 400px!important;
+      margin: 80px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.btn {
+    color: #fff;
+    background-color: #db4566!important;
+    border-color: #db4566!important;
+}
+.btn:hover {
+    color: #fff;
+    background: transparent!important;
+    border-color: #db4566!important;
+}
+a{
+  color:#db4566;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #db4566;
+}
+button:focus {
+    outline: 0;
 }
