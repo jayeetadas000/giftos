@@ -1,0 +1,52 @@
+<!-- checkout.html -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="header"></div>
+    <div class="checkout-form">
+        <h2>Checkout</h2>
+        <form id="orderForm">
+            <label for="address">Address:</label>
+            <textarea id="address" required></textarea>
+
+            <label>
+                <input type="checkbox" id="cod" required>
+                Cash on Delivery
+            </label>
+
+            <button type="submit" id="processBtn">Process Order</button>
+
+        </form>
+        <div id="thankYouMessage" style="display: none; margin-top: 20px;">
+            <h3>Thank you for your order!</h3>
+        </div>
+    </div>
+
+     <div id="footer"></div>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+    </script>
+    <script src="js/custom.js"></script>
+
+</body>
+
+</html>

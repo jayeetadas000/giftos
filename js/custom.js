@@ -20,10 +20,10 @@ $('.owl-carousel').owlCarousel({
   }
 });
 
-function changeImage(element) {
-  const mainImage = document.getElementById('main-image');
-  if (mainImage) mainImage.src = element.src;
-}
+// function changeImage(element) {
+//   const mainImage = document.getElementById('main-image');
+//   if (mainImage) mainImage.src = element.src;
+// }
 
 // Load Header and Footer
 fetch('includes/header.html')
@@ -59,17 +59,23 @@ fetch('includes/header.html')
     }
 
     // Checkout button logic
-    const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || false;
+    // const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || false;
+    // const checkoutBtn = document.getElementById('checkout-btn');
+    // if (checkoutBtn) {
+    //   checkoutBtn.addEventListener('click', () => {
+    //     if (!isLoggedIn) {
+    //       alert('You need to login to proceed to checkout.');
+    //     } else {
+    //       window.location.href = 'checkout.html';
+    //     }
+    //   });
+    // }
     const checkoutBtn = document.getElementById('checkout-btn');
-    if (checkoutBtn) {
-      checkoutBtn.addEventListener('click', () => {
-        if (!isLoggedIn) {
-          alert('You need to login to proceed to checkout.');
-        } else {
-          window.location.href = 'checkout.html';
-        }
-      });
-    }
+if (checkoutBtn) {
+  checkoutBtn.addEventListener('click', () => {
+    window.location.href = './check-out.html';
+  });
+}
 
     
     renderCartDrawer();
@@ -194,3 +200,37 @@ function setActiveNav() {
     }
   });
 }
+
+// make another js file and add this below code
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("orderForm");
+  const thankYouMessage = document.getElementById("thankYouMessage");
+
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const address = document.getElementById("address").value.trim();
+      const codChecked = document.getElementById("cod").checked;
+
+      if (!address) {
+        alert("Please enter your address.");
+        return;
+      }
+
+      if (!codChecked) {
+        alert("Please check the Cash on Delivery option.");
+        return;
+      }
+      console.log("done")
+      // Simulate order processing
+      form.style.display = "none";
+      thankYouMessage.style.display = "block";
+
+      // Optionally clear cart
+      localStorage.removeItem('cart');
+    });
+  }
+});
