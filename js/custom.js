@@ -1,10 +1,10 @@
 // Set current year
-function getYear() {
-  const currentYear = new Date().getFullYear();
-  const yearEl = document.querySelector("#displayYear");
-  if (yearEl) yearEl.textContent = currentYear;
-}
-getYear();
+// function getYear() {
+//   const currentYear = new Date().getFullYear();
+//   const yearEl = document.querySelector("#displayYear");
+//   if (yearEl) yearEl.textContent = currentYear;
+// }
+// getYear();
 
 // Owl Carousel Setup
 $('.owl-carousel').owlCarousel({
