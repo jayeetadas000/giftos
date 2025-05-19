@@ -1263,13 +1263,14 @@ button#processBtn:hover {
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
-.btn {
+.lr-form-container .btn {
     color: #fff;
     background-color: #db4566!important;
     border-color: #db4566!important;
+    width:100%;
 }
-.btn:hover {
-    color: #fff;
+.lr-form-container .btn:hover {
+    color: #db4566;
     background: transparent!important;
     border-color: #db4566!important;
 }

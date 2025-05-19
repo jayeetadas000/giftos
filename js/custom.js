@@ -58,6 +58,7 @@ fetch('includes/header.html')
       checkoutBtn.addEventListener('click', () => {
         const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
         if (!isLoggedIn) {
+          localStorage.setItem('redirectAfterLogin', 'check-out.html');
           alert('Please login or register before proceeding to checkout.');
           window.location.href = 'login.html';
         } else {
@@ -236,9 +237,23 @@ if (window.location.pathname.includes('login.html')) {
     if (loginForm) {
       loginForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        localStorage.setItem('userLoggedIn', 'true');
-        alert("Login successful!");
-        window.location.href = 'index.html';
+
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const matchedUser = users.find(user => user.email === email && user.password === password);
+
+        if (matchedUser) {
+          localStorage.setItem('userLoggedIn', 'true');
+          alert("Login successful!");
+
+          const redirectTo = localStorage.getItem('redirectAfterLogin') || 'index.html';
+          localStorage.removeItem('redirectAfterLogin');
+          window.location.href = redirectTo;
+        } else {
+          alert("Invalid email or password.");
+        }
       });
     }
   });
@@ -251,9 +266,25 @@ if (window.location.pathname.includes('register.html')) {
     if (registerForm) {
       registerForm.addEventListener("submit", function (e) {
         e.preventDefault();
+
+        const email = document.getElementById("registerEmail").value.trim();
+        const password = document.getElementById("registerPassword").value;
+
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        const existingUser = users.find(user => user.email === email);
+        if (existingUser) {
+          alert("Email already registered.");
+          return;
+        }
+
+        users.push({ email, password });
+        localStorage.setItem('users', JSON.stringify(users));
         localStorage.setItem('userLoggedIn', 'true');
+
         alert("Registration successful!");
-        window.location.href = 'index.html';
+        const redirectTo = localStorage.getItem('redirectAfterLogin') || 'index.html';
+        localStorage.removeItem('redirectAfterLogin');
+        window.location.href = redirectTo;
       });
     }
   });
