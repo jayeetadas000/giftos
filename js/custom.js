@@ -1,26 +1,4 @@
-// Set current year
-// function getYear() {
-//   const currentYear = new Date().getFullYear();
-//   const yearEl = document.querySelector("#displayYear");
-//   if (yearEl) yearEl.textContent = currentYear;
-// }
-// getYear();
-
-// Owl Carousel Setup
-$('.owl-carousel').owlCarousel({
-  loop: true,
-  margin: 10,
-  nav: true,
-  autoplay: true,
-  autoplayHoverPause: true,
-  responsive: {
-    0: { items: 1 },
-    600: { items: 3 },
-    1000: { items: 6 }
-  }
-});
-
-// Load Header & Footer
+// ========== Header & Footer ==========
 fetch('includes/header.html')
   .then(res => res.text())
   .then(data => {
@@ -32,7 +10,7 @@ fetch('includes/header.html')
 
     const cartIcon = document.querySelector(".cart-icon");
     if (cartIcon) {
-      cartIcon.addEventListener("click", function (e) {
+      cartIcon.addEventListener("click", (e) => {
         e.preventDefault();
         openCartDrawer();
       });
@@ -68,9 +46,7 @@ fetch('includes/header.html')
     }
 
     const logoutLink = document.getElementById('logout-btn');
-    if (logoutLink) {
-      logoutLink.addEventListener('click', logout);
-    }
+    if (logoutLink) logoutLink.addEventListener('click', logout);
   });
 
 fetch('includes/footer.html')
@@ -79,7 +55,7 @@ fetch('includes/footer.html')
     document.getElementById('footer').innerHTML = data;
   });
 
-// Product Click
+// ========== Product Click on Shop Page ==========
 const productBoxes = document.querySelectorAll('.product-box');
 productBoxes.forEach(product => {
   product.addEventListener('click', () => {
@@ -87,23 +63,27 @@ productBoxes.forEach(product => {
     const name = product.getAttribute('data-name');
     const price = product.getAttribute('data-price');
     const image = product.getAttribute('data-image');
-    const productData = { id, name, price, image };
+    const description = product.getAttribute('data-description');
+    const productData = { id, name, price, image, description };
     localStorage.setItem('selectedProduct', JSON.stringify(productData));
     window.location.href = 'product-details.html';
   });
 });
 
-// Render Product Details
+// ========== Render Product Details Page ==========
 const product = JSON.parse(localStorage.getItem('selectedProduct'));
 if (product) {
   const nameEl = document.getElementById('product-name');
   const priceEl = document.getElementById('product-price');
   const imageEl = document.getElementById('product-image');
-  if (nameEl && priceEl && imageEl) {
+  const descEl = document.querySelector('.description');
+
+  if (nameEl && priceEl && imageEl && descEl) {
     nameEl.innerText = product.name;
     priceEl.innerText = `$${product.price}`;
     imageEl.src = product.image;
     imageEl.alt = product.name;
+    descEl.innerText = product.description || "No description available.";
   }
 } else {
   const detailsDiv = document.querySelector('.product-details');
@@ -112,7 +92,7 @@ if (product) {
   }
 }
 
-// Add to Cart
+// ========== Add to Cart ==========
 const addToCartBtn = document.getElementById('add-to-cart');
 if (addToCartBtn) {
   addToCartBtn.addEventListener('click', () => {
@@ -124,7 +104,7 @@ if (addToCartBtn) {
   });
 }
 
-// Utility Functions
+// ========== Cart Utilities ==========
 function openCartDrawer() {
   const drawer = document.getElementById('cartDrawer');
   if (drawer) drawer.classList.add('open');
@@ -133,9 +113,7 @@ function openCartDrawer() {
 function updateCartCount() {
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
   const cartCountEl = document.getElementById('cart-count');
-  if (cartCountEl) {
-    cartCountEl.textContent = cart.length;
-  }
+  if (cartCountEl) cartCountEl.textContent = cart.length;
 }
 
 function renderCartDrawer() {
@@ -171,6 +149,7 @@ function removeFromCart(index) {
   renderCartDrawer();
 }
 
+// ========== Nav Active Highlight ==========
 function setActiveNav() {
   const currentPath = window.location.pathname.split('/').pop();
   document.querySelectorAll('.navbar-nav .nav-item').forEach(item => {
@@ -190,7 +169,7 @@ function setActiveNav() {
   });
 }
 
-// Checkout Page Logic
+// ========== Checkout Page ==========
 if (window.location.pathname.includes('check-out.html')) {
   document.addEventListener("DOMContentLoaded", function () {
     const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
@@ -230,7 +209,7 @@ if (window.location.pathname.includes('check-out.html')) {
   });
 }
 
-// Login Page Logic
+// ========== Login Page ==========
 if (window.location.pathname.includes('login.html')) {
   document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("loginForm");
@@ -259,7 +238,7 @@ if (window.location.pathname.includes('login.html')) {
   });
 }
 
-// Register Page Logic
+// ========== Register Page ==========
 if (window.location.pathname.includes('register.html')) {
   document.addEventListener("DOMContentLoaded", function () {
     const registerForm = document.getElementById("registerForm");
@@ -290,7 +269,7 @@ if (window.location.pathname.includes('register.html')) {
   });
 }
 
-// Logout function
+// ========== Logout ==========
 function logout() {
   localStorage.removeItem('userLoggedIn');
   alert('You have been logged out.');
