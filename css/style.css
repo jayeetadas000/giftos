@@ -93,17 +93,26 @@ body {
 }
 
 #navbarSupportedContent .navbar-nav .nav-link {
-  padding: 5px 25px;
+  padding: 0 20px 0 0;
   color: #514f4f;
   text-align: center;
   text-transform: uppercase;
   border-radius: 5px;
 }
 
-#navbarSupportedContent .nav-item.active .nav-link {
-  background-color: #ffffff;
+#navbarSupportedContent .nav-item.active .nav-link ,#navbarSupportedContent .nav-item .nav-link:hover{
+  color: #db4566;
+    font-weight: 500;
 }
-
+.dropdown-menu{
+  overflow:hidden;
+}
+.account  .dropdown-menu {
+    left: -73%;
+}
+.navbar-brand span span{
+    color: #db4566;
+}
 a,
 a:hover,
 a:focus {
@@ -134,6 +143,7 @@ a:focus {
   text-transform: uppercase;
   margin: 0;
   padding: 0;
+  font-style: italic;
 }
 
 .custom_nav-container .nav_search-btn {
@@ -227,12 +237,15 @@ a:focus {
 }
 
 .user_option a {
-  margin-right: 25px;
+  margin-right: 9px;
   color: #000000;
 }
 
 .user_option a span {
   margin-left: 5px;
+}
+.account i{
+    font-size: 30px;
 }
 
 /*end header section*/
@@ -254,9 +267,9 @@ a:focus {
   height: 100%; /* Ensure all containers fill the fixed height */
 }
 
-.slider_section .detail-box {
+/* .slider_section .detail-box {
   padding: 20px 30px;
-}
+} */
 
 .slider_section .detail-box h1 {
   font-weight: 700;
@@ -275,7 +288,7 @@ a:focus {
   padding: 12px 30px;
   background-color: #ffffff;
   color: #db4566;
-  border-radius: 30px;
+  border-radius: 4px;
   font-weight: bold;
   transition: 0.3s ease-in-out;
   text-transform: uppercase;
@@ -293,8 +306,8 @@ a:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  padding: 30px;
+  height: 500px;
+  /* padding: 30px; */
 }
 
 .slider_section .img-box img {
@@ -310,8 +323,8 @@ a:focus {
   display: flex;
   gap: 10px;
   position: absolute;
-  bottom: -20px;
-  left: 50%;
+  bottom: 13%;
+  left: 6%;
   transform: translateX(-50%);
   z-index: 10;
 }
@@ -329,6 +342,7 @@ a:focus {
   font-size: 18px;
   text-decoration: none;
   transition: all 0.3s ease;
+  margin-right: 10px;
 }
 
 .slider_section .carousel_btn-box .carousel-control-prev:hover,
@@ -489,6 +503,7 @@ a:focus {
   border-radius: 0;
   -webkit-transition: all .3s;
   transition: all .3s;
+  border-radius: 4px;
 }
 
 .saving_section .detail-box .btn-box .btn1:hover {
@@ -1283,13 +1298,16 @@ a{
   color:#db4566;
 }
 
-.dropdown-item.active, .dropdown-item:active {
+.dropdown-item.active, .dropdown-item:active, .dropdown-item.active, .dropdown-item:hover {
     background-color: #db4566;
+    color:#fff;
 }
 button:focus {
     outline: 0;
 }
-
+header i:hover, #footer i:hover {
+    color: #db4566;
+}
 .navbar-toggler-icon {
   font-size: 24px;
   color: #000;
